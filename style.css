@@ -224,6 +224,13 @@ input {
   left: 10px;
 }
 
+.imageDealerFaceUpCard2 {
+  width: 80%;
+  z-index: 20;
+  position: absolute;
+  left: 100px;
+}
+
 .imagePlayerCard3 {
   width: 80%;
   z-index: 30;

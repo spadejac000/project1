@@ -62,7 +62,7 @@ var cardDeck = {
   27: 'images/aceOfDiamonds.jpg',
   28: 'images/twoOfDiamonds.jpg',
   29: 'images/threeOfDiamonds.jpg',
-  30: 'images/fourOfDiamonds.jpg',
+  30: 'images/fourOfDiamonds.png',
   31: 'images/fiveOfDiamonds.jpg',
   32: 'images/sixOfDiamonds.jpg',
   33: 'images/sevenOfDiamonds.jpg',
@@ -228,9 +228,20 @@ document.getElementById('hit').addEventListener('click', function() {
   firstHand.appendChild(playerCard3);
 });
 
+function removeElement(elementClassName) {
+  console.log('working');
+  // Removes an element from the document
+  var element = document.getElementsByClassName(elementClassName)[0];
+  element.parentNode.removeChild(element);
+}
+
 // flip dealers facedown card
 document.getElementById('stand').addEventListener('click', function() {
-  function() {
-    document.removeElement('img');
-  }
+
+  var faceDownCard = document.getElementsByClassName('imageDealerCard2')[0];
+  removeElement('imageDealerCard2');
+  var dealerFaceUpCard2 = document.createElement('img');
+  dealerFaceUpCard2.src = cardDeck['30'];
+  dealerFaceUpCard2.classList.add('imageDealerFaceUpCard2');
+  dealerHand.appendChild(dealerFaceUpCard2);
 });
