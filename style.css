@@ -1,0 +1,233 @@
+body {
+  width: 70%;
+  margin: auto;
+}
+
+.table {
+  z-index: 10;
+  position: relative;
+}
+
+.dealer,
+.player1,
+.player2,
+.player3,
+.player4,
+.player5,
+.player6,
+.player7 {
+  width: 100px;
+  height: 100px;
+  border: 2px solid black;
+  z-index: 100;
+}
+
+.dealer {
+  position: absolute;
+  top: 50px;
+  left: 660px;
+}
+
+.player1 {
+  position: absolute;
+  top: 250px;
+  left: 270px;
+}
+
+.player2 {
+  position: absolute;
+  top: 385px;
+  left: 380px;
+}
+
+.player3 {
+  position: absolute;
+  top: 460px;
+  left: 500px;
+}
+
+.player4 {
+  position: absolute;
+  top: 490px;
+  left: 660px;
+}
+
+.player5 {
+  position: absolute;
+  top: 460px;
+  left: 810px;
+}
+
+.player6 {
+  position: absolute;
+  top: 385px;
+  left: 940px;
+}
+
+.player7 {
+  position: absolute;
+  top: 250px;
+  left: 1055px;
+}
+
+.bet1 {
+  width: 50px;
+  height: 50px;
+  border: 2px solid black;
+  border-radius: 50%;
+  position: absolute;
+  top: 203px;
+  left: 371px;
+  z-index: 100;
+  font-size: 30px;
+  color: red;
+  text-align: center;
+  padding-top: 3px;
+}
+
+.bet2 {
+  width: 50px;
+  height: 50px;
+  border: 2px solid black;
+  border-radius: 50%;
+  position: absolute;
+  top: 320px;
+  left: 443px;
+  z-index: 100;
+  font-size: 30px;
+  color: red;
+  text-align: center;
+  padding-top: 3px;
+}
+
+.bet3 {
+  width: 50px;
+  height: 50px;
+  border: 2px solid black;
+  border-radius: 50%;
+  position: absolute;
+  top: 395px;
+  left: 558px;
+  z-index: 100;
+  font-size: 30px;
+  color: red;
+  text-align: center;
+  padding-top: 3px;
+}
+
+.bet4 {
+  width: 50px;
+  height: 50px;
+  border: 2px solid black;
+  border-radius: 50%;
+  position: absolute;
+  top: 421px;
+  left: 688px;
+  z-index: 100;
+  font-size: 30px;
+  color: red;
+  text-align: center;
+  padding-top: 3px;
+}
+
+.bet5 {
+  width: 50px;
+  height: 50px;
+  border: 2px solid black;
+  border-radius: 50%;
+  position: absolute;
+  top: 395px;
+  left: 821px;
+  z-index: 100;
+  font-size: 30px;
+  color: red;
+  text-align: center;
+  padding-top: 3px;
+}
+
+.bet6 {
+  width: 50px;
+  height: 50px;
+  border: 2px solid black;
+  border-radius: 50%;
+  position: absolute;
+  top: 320px;
+  left: 934px;
+  z-index: 100;
+  font-size: 30px;
+  color: red;
+  text-align: center;
+  padding-top: 3px;
+}
+
+.bet7 {
+  width: 50px;
+  height: 50px;
+  border: 2px solid black;
+  border-radius: 50%;
+  position: absolute;
+  top: 202px;
+  left: 1006px;
+  z-index: 100;
+  font-size: 30px;
+  color: red;
+  text-align: center;
+  padding-top: 3px;
+}
+
+.turn {
+  text-align: center;
+  color: purple;
+}
+
+#player {
+  width: 50px;
+  height: 50px;
+  border: 2px solid black;
+  background-color: red;
+  color: black;
+  padding: .5em;
+}
+
+#deal,
+#bet,
+#submit,
+#hit,
+#stand,
+label,
+input {
+  width: 100px;
+  font-size: 30px;
+}
+
+.panel {
+  text-align: center;
+}
+
+.image {
+  width: 80%;
+}
+
+.imageCard2 {
+  width: 80%;
+  z-index: 20;
+  position: absolute;
+  top: 10px;
+  left: 10px;
+}
+
+.imageDealerCard2 {
+  width: 80%;
+  z-index: -20;
+  position: absolute;
+  top: 10px;
+  left: 10px;
+}
+
+.imagePlayerCard3 {
+  width: 80%;
+  z-index: 30;
+  position: absolute;
+  top: 20px;
+  left: 20px;
+}
