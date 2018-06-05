@@ -12,6 +12,12 @@
 // if dealers hand is greater than players hand and less than 22 then dealer wins
 // else dealer loses and player wins
 
+//deal randomly give cards to player/dealer from a deck
+//bet  place money on table       check
+//hit / draw          draw a new card from a deck and add it to current hand value    check
+//stand     stop current player turn and go to next
+//winner    evaluation on who is closest to 21
+
 var dealer;
 var player1 = true;
 var player2 = false;
@@ -31,6 +37,270 @@ var card = document.getElementById('card');
 var bet1 = document.getElementsByClassName('bet1')[0];
 var firstHand = document.getElementsByClassName('player1')[0];
 var dealerHand = document.getElementsByClassName('dealer')[0];
+var dealerCards;
+
+var cardsArray = [
+  {
+    rank: "ace",
+    suit: "clubs",
+    cardImage: "images/queen-of-hearts.png",
+  },
+  {
+    rank: 2,
+    suit: "clubs",
+    cardImage: "images/queen-of-diamonds.png",
+  },
+  {
+    rank: 3,
+    suit: "clubs",
+    cardImage: "images/king-of-hearts.png",
+  },
+  {
+    rank: 4,
+    suit: "clubs",
+    cardImage: "images/king-of-diamonds.png",
+  },
+  {
+    rank: 5,
+    suit: "clubs",
+    cardImage: "images/queen-of-hearts.png",
+  },
+  {
+    rank: 6,
+    suit: "clubs",
+    cardImage: "images/queen-of-diamonds.png",
+  },
+  {
+    rank: 7,
+    suit: "clubs",
+    cardImage: "images/king-of-hearts.png",
+  },
+  {
+    rank: 8,
+    suit: "clubs",
+    cardImage: "images/king-of-diamonds.png",
+  },
+  {
+    rank: 9,
+    suit: "clubs",
+    cardImage: "images/queen-of-hearts.png",
+  },
+  {
+    rank: 10,
+    suit: "clubs",
+    cardImage: "images/queen-of-diamonds.png",
+  },
+  {
+    rank: "jack",
+    suit: "clubs",
+    cardImage: "images/king-of-hearts.png",
+  },
+  {
+    rank: "queen",
+    suit: "clubs",
+    cardImage: "images/king-of-diamonds.png",
+  },
+  {
+    rank: "king",
+    suit: "clubs",
+    cardImage: "images/queen-of-hearts.png",
+  },
+  {
+    rank: "ace",
+    suit: "diamonds",
+    cardImage: "images/king-of-hearts.png",
+  },
+  {
+    rank: 2,
+    suit: "diamonds",
+    cardImage: "images/king-of-diamonds.png",
+  },
+  {
+    rank: 3,
+    suit: "diamonds",
+    cardImage: "images/queen-of-hearts.png",
+  },
+  {
+    rank: 4,
+    suit: "diamonds",
+    cardImage: "images/queen-of-diamonds.png",
+  },
+  {
+    rank: 5,
+    suit: "diamonds",
+    cardImage: "images/king-of-hearts.png",
+  },
+  {
+    rank: 6,
+    suit: "diamonds",
+    cardImage: "images/king-of-diamonds.png",
+  },
+  {
+    rank: 7,
+    suit: "diamonds",
+    cardImage: "images/queen-of-hearts.png",
+  },
+  {
+    rank: 8,
+    suit: "diamonds",
+    cardImage: "images/queen-of-diamonds.png",
+  },
+  {
+    rank: 9,
+    suit: "diamonds",
+    cardImage: "images/king-of-hearts.png",
+  },
+  {
+    rank: 10,
+    suit: "diamonds",
+    cardImage: "images/king-of-diamonds.png",
+  },
+  {
+    rank: "jack",
+    suit: "diamonds",
+    cardImage: "images/queen-of-hearts.png",
+  },
+  {
+    rank: "queen",
+    suit: "diamonds",
+    cardImage: "images/queen-of-diamonds.png",
+  },
+  {
+    rank: "king",
+    suit: "diamonds",
+    cardImage: "images/king-of-hearts.png",
+  },
+  {
+    rank: "ace",
+    suit: "hearts",
+    cardImage: "images/king-of-diamonds.png",
+  },
+  {
+    rank: 2,
+    suit: "hearts",
+    cardImage: "images/king-of-diamonds.png",
+  },
+  {
+    rank: 3,
+    suit: "hearts",
+    cardImage: "images/queen-of-hearts.png",
+  },
+  {
+    rank: 4,
+    suit: "hearts",
+    cardImage: "images/queen-of-diamonds.png",
+  },
+  {
+    rank: 5,
+    suit: "hearts",
+    cardImage: "images/king-of-hearts.png",
+  },
+  {
+    rank: 6,
+    suit: "hearts",
+    cardImage: "images/king-of-diamonds.png",
+  },
+  {
+    rank: 7,
+    suit: "hearts",
+    cardImage: "images/queen-of-hearts.png",
+  },
+  {
+    rank: 8,
+    suit: "hearts",
+    cardImage: "images/queen-of-diamonds.png",
+  },
+  {
+    rank: 9,
+    suit: "hearts",
+    cardImage: "images/king-of-hearts.png",
+  },
+  {
+    rank: 10,
+    suit: "hearts",
+    cardImage: "images/king-of-diamonds.png",
+  },
+  {
+    rank: "jack",
+    suit: "hearts",
+    cardImage: "images/queen-of-hearts.png",
+  },
+  {
+    rank: "queen",
+    suit: "hearts",
+    cardImage: "images/queen-of-diamonds.png",
+  },
+  {
+    rank: "king",
+    suit: "hearts",
+    cardImage: "images/king-of-hearts.png",
+  },
+  {
+    rank: "ace",
+    suit: "spades",
+    cardImage: "images/king-of-diamonds.png",
+  },
+  {
+    rank: 2,
+    suit: "spades",
+    cardImage: "images/queen-of-hearts.png",
+  },
+  {
+    rank: 3,
+    suit: "spades",
+    cardImage: "images/queen-of-diamonds.png",
+  },
+  {
+    rank: 4,
+    suit: "spades",
+    cardImage: "images/king-of-hearts.png",
+  },
+  {
+    rank: 5,
+    suit: "spades",
+    cardImage: "images/king-of-diamonds.png",
+  },
+  {
+    rank: 6,
+    suit: "spades",
+    cardImage: "images/queen-of-hearts.png",
+  },
+  {
+    rank: 7,
+    suit: "spades",
+    cardImage: "images/queen-of-diamonds.png",
+  },
+  {
+    rank: 8,
+    suit: "spades",
+    cardImage: "images/king-of-hearts.png",
+  },
+  {
+    rank: 9,
+    suit: "spades",
+    cardImage: "images/king-of-diamonds.png",
+  },
+  {
+    rank: 10,
+    suit: "spades",
+    cardImage: "images/queen-of-hearts.png",
+  },
+  {
+    rank: "jack",
+    suit: "spades",
+    cardImage: "images/queen-of-diamonds.png",
+  },
+  {
+    rank: "queen",
+    suit: "spades",
+    cardImage: "images/king-of-hearts.png",
+  },
+  {
+    rank: "king",
+    suit: "spades",
+    cardImage: "images/king-of-diamonds.png",
+  },
+];
 
 var cardDeck = {
   1: 'images/aceOfSpades.jpg',
@@ -221,12 +491,7 @@ document.getElementById('deal').addEventListener("click", deal);
 
 
 // player hits function
-document.getElementById('hit').addEventListener('click', function() {
-  var playerCard3 = document.createElement('img');
-  playerCard3.src = cardDeck['20'];
-  playerCard3.classList.add('imagePlayerCard3');
-  firstHand.appendChild(playerCard3);
-});
+document.getElementById('hit').addEventListener('click', drawCard);
 
 function removeElement(elementClassName) {
   console.log('working');
@@ -245,3 +510,26 @@ document.getElementById('stand').addEventListener('click', function() {
   dealerFaceUpCard2.classList.add('imageDealerFaceUpCard2');
   dealerHand.appendChild(dealerFaceUpCard2);
 });
+
+// dealer process
+var dealerProcess = function() {
+  // find out current hand value
+ cardsArray[i].rank
+  var dealerCards = placeholder;
+  while(dealerCard < 17) {
+    // draw a card
+    var value = placeholder;// drawCard function
+    // add new card value to original dealerCards
+  }
+    //determine winner
+}
+
+// This function draws a random card for anyone
+var drawCard = function() {
+  var cardElement = document.createElement('img');
+  var randomCard = function() {
+    return cardsArray[(Math.floor(Math.random * 52) + 1)];
+  }
+  cardElement.setAttribute('src', randomCard());
+  document.getElementById('dealer').appendChild(cardElement);
+}
