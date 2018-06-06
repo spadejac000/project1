@@ -8,66 +8,150 @@ body {
   position: relative;
 }
 
-.dealer,
-.player1,
-.player2,
-.player3,
-.player4,
-.player5,
-.player6,
-.player7 {
+.dealerCard1,
+.dealerCard2,
+.cardBack,
+.dealerCard3,
+.dealerCard4,
+.dealerCard5,
+.dealerCard6,
+.dealerCard7,
+.dealerCard8,
+.dealerCard9,
+.dealerCard10,
+.player1Card1,
+.player1Card2,
+.player1Card3,
+.player1Card4,
+.player1Card5,
+.player1Card6,
+.player1Card7,
+.player1Card8,
+.player1Card9,
+.player1Card10 {
   width: 100px;
   height: 100px;
-  border: 2px solid black;
   z-index: 100;
 }
 
-.dealer {
+.dealerCard1 {
   position: absolute;
   top: 50px;
   left: 660px;
 }
 
-.player1 {
+.dealerCard2 {
+  position: absolute;
+  top: 60px;
+  left: 670px;
+}
+
+.dealerCard3 {
+  position: absolute;
+  top: 70px;
+  left: 680px;
+}
+
+.dealerCard4 {
+  position: absolute;
+  top: 80px;
+  left: 690px;
+}
+
+.dealerCard5 {
+  position: absolute;
+  top: 90px;
+  left: 700px;
+}
+
+.dealerCard6 {
+  position: absolute;
+  top: 100px;
+  left: 710px;
+}
+
+.dealerCard7 {
+  position: absolute;
+  top: 110px;
+  left: 720px;
+}
+
+.dealerCard8 {
+  position: absolute;
+  top: 120px;
+  left: 730px;
+}
+
+.dealerCard9 {
+  position: absolute;
+  top: 130px;
+  left: 740px;
+}
+
+.dealerCard10 {
+  position: absolute;
+  top: 140px;
+  left: 750px;
+}
+
+.player1Card1 {
   position: absolute;
   top: 250px;
   left: 270px;
 }
 
-.player2 {
+.player1Card2 {
   position: absolute;
-  top: 385px;
-  left: 380px;
+  top: 260px;
+  left: 280px;
 }
 
-.player3 {
+.player1Card3 {
   position: absolute;
-  top: 460px;
-  left: 500px;
+  top: 270px;
+  left: 290px;
 }
 
-.player4 {
+.player1Card4 {
   position: absolute;
-  top: 490px;
-  left: 660px;
+  top: 280px;
+  left: 300px;
 }
 
-.player5 {
+.player1Card5 {
   position: absolute;
-  top: 460px;
-  left: 810px;
+  top: 290px;
+  left: 310px;
 }
 
-.player6 {
+.player1Card6 {
   position: absolute;
-  top: 385px;
-  left: 940px;
+  top: 300px;
+  left: 320px;
 }
 
-.player7 {
+.player1Card7 {
   position: absolute;
-  top: 250px;
-  left: 1055px;
+  top: 310px;
+  left: 330px;
+}
+
+.player1Card8 {
+  position: absolute;
+  top: 320px;
+  left: 340px;
+}
+
+.player1Card9 {
+  position: absolute;
+  top: 330px;
+  left: 350px;
+}
+
+.player1Card10 {
+  position: absolute;
+  top: 340px;
+  left: 360px;
 }
 
 .bet1 {
@@ -78,96 +162,6 @@ body {
   position: absolute;
   top: 203px;
   left: 371px;
-  z-index: 100;
-  font-size: 30px;
-  color: red;
-  text-align: center;
-  padding-top: 3px;
-}
-
-.bet2 {
-  width: 50px;
-  height: 50px;
-  border: 2px solid black;
-  border-radius: 50%;
-  position: absolute;
-  top: 320px;
-  left: 443px;
-  z-index: 100;
-  font-size: 30px;
-  color: red;
-  text-align: center;
-  padding-top: 3px;
-}
-
-.bet3 {
-  width: 50px;
-  height: 50px;
-  border: 2px solid black;
-  border-radius: 50%;
-  position: absolute;
-  top: 395px;
-  left: 558px;
-  z-index: 100;
-  font-size: 30px;
-  color: red;
-  text-align: center;
-  padding-top: 3px;
-}
-
-.bet4 {
-  width: 50px;
-  height: 50px;
-  border: 2px solid black;
-  border-radius: 50%;
-  position: absolute;
-  top: 421px;
-  left: 688px;
-  z-index: 100;
-  font-size: 30px;
-  color: red;
-  text-align: center;
-  padding-top: 3px;
-}
-
-.bet5 {
-  width: 50px;
-  height: 50px;
-  border: 2px solid black;
-  border-radius: 50%;
-  position: absolute;
-  top: 395px;
-  left: 821px;
-  z-index: 100;
-  font-size: 30px;
-  color: red;
-  text-align: center;
-  padding-top: 3px;
-}
-
-.bet6 {
-  width: 50px;
-  height: 50px;
-  border: 2px solid black;
-  border-radius: 50%;
-  position: absolute;
-  top: 320px;
-  left: 934px;
-  z-index: 100;
-  font-size: 30px;
-  color: red;
-  text-align: center;
-  padding-top: 3px;
-}
-
-.bet7 {
-  width: 50px;
-  height: 50px;
-  border: 2px solid black;
-  border-radius: 50%;
-  position: absolute;
-  top: 202px;
-  left: 1006px;
   z-index: 100;
   font-size: 30px;
   color: red;
@@ -204,8 +198,15 @@ input {
   text-align: center;
 }
 
-.image {
+.image{
   width: 80%;
+  z-index: 1;
+}
+
+.cardBack {
+  width: 80%;
+  z-index: 2;
+  /* z-index: 200px; */
 }
 
 .imageCard2 {
