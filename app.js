@@ -39,6 +39,7 @@ var dealerCard10 = document.getElementsByClassName('dealerCard10')[0];
 var dealerCards;
 var dealerArray = [];
 var playerArray = [];
+var cardCount = 0;
 
 var cardsArray = [
   {
@@ -315,24 +316,36 @@ document.getElementById('bet').addEventListener('click', function() {
 //hit / draw          draw a new card from a deck and add it to current hand value
 // This function draws a random card for anyone
 var drawCard = function() {
-  var cardElement = document.createElement('img');
-  var randomCard = function() {
     return cardsArray[Math.floor(Math.random() * 52)];
-  }
-  var card = randomCard();
-  cardElement.setAttribute('src', card.cardImage);
-  cardElement.setAttribute('class', 'image');
-  return cardElement;
 }
 
 //deal randomly give cards to player/dealer from a deck
 function deal() {
   if(bet1.textContent !== '' && bet1.textContent >= 5) {
-
-    player1Card1.appendChild(drawCard());
-    dealerCard1.appendChild(drawCard());
-    player1Card2.appendChild(drawCard());
-    dealerCard2.appendChild(drawCard());
+    var card = drawCard();
+    var cardElement = document.createElement('img');
+    cardElement.setAttribute('src', card.cardImage);
+    cardElement.setAttribute('class', 'image');
+    player1Card1.appendChild(cardElement);
+    playerArray.push(card.rank);
+    card = drawCard();
+    cardElement = document.createElement('img');
+    cardElement.setAttribute('src', card.cardImage);
+    cardElement.setAttribute('class', 'image');
+    dealerCard1.appendChild(cardElement);
+    dealerArray.push(card.rank);
+    card = drawCard();
+    cardElement = document.createElement('img');
+    cardElement.setAttribute('src', card.cardImage);
+    cardElement.setAttribute('class', 'image');
+    player1Card2.appendChild(cardElement);
+    playerArray.push(card.rank);
+    card = drawCard();
+    cardElement = document.createElement('img');
+    cardElement.setAttribute('src', card.cardImage);
+    cardElement.setAttribute('class', 'image');
+    dealerCard2.appendChild(cardElement);
+    dealerArray.push(card.rank);
     var cardBack = document.createElement('img');
     cardBack.setAttribute('src', 'images/red_back.png');
     cardBack.setAttribute('class', 'cardBack');
@@ -341,10 +354,96 @@ function deal() {
 }
 document.getElementById('deal').addEventListener("click", deal);
 
-//stand     stop current player turn and go to next
-function stand() {
-
+// hit button
+// appending child to a new div each time hit button is clicked to stagger cards
+function hit() {
+  if(cardCount === 7) {
+    player1Card10.appendChild(drawCard());
+    cardCount++
+  }
+  if(cardCount === 6) {
+    player1Card9.appendChild(drawCard());
+    cardCount++
+  }
+  if(cardCount === 5) {
+    player1Card8.appendChild(drawCard());
+    cardCount++
+  }
+  if(cardCount === 4) {
+    player1Card7.appendChild(drawCard());
+    cardCount++
+  }
+  if(cardCount === 3) {
+    player1Card6.appendChild(drawCard());
+    cardCount++
+  }
+  if(cardCount === 2) {
+    player1Card5.appendChild(drawCard());
+    cardCount++
+  }
+  if(cardCount === 1){
+    player1Card4.appendChild(drawCard());
+    cardCount++;
+  }
+  if(cardCount === 0){
+    player1Card3.appendChild(drawCard());
+    cardCount++;
+  }
 }
+
+// player hits function
+document.getElementById('hit').addEventListener('click', hit);
+
+//stand     stop current player turn and go to next
+// function stand() {
+//
+// }
+
+document.getElementById('stand').addEventListener('click', function() {
+  document.getElementById('hit').disabled = true;
+  if(dealerArray.value < 17) {
+    // Draw a card
+    // hit button
+    // appending child to a new div each time hit button is clicked to stagger cards
+    function hit() {
+      var cardCount = 0;
+      if(cardCount === 7) {
+        dealerCard10.appendChild(drawCard());
+        cardCount++
+      }
+      if(cardCount === 6) {
+        dealerCard9.appendChild(drawCard());
+        cardCount++
+      }
+      if(cardCount === 5) {
+        dealerCard8.appendChild(drawCard());
+        cardCount++
+      }
+      if(cardCount === 4) {
+        dealerCard7.appendChild(drawCard());
+        cardCount++
+      }
+      if(cardCount === 3) {
+        dealerCard6.appendChild(drawCard());
+        cardCount++
+      }
+      if(cardCount === 2) {
+        dealerCard5.appendChild(drawCard());
+        cardCount++
+      }
+      if(cardCount === 1){
+        dealerCard4.appendChild(drawCard());
+        cardCount++;
+      }
+      if(cardCount === 0){
+        dealerCard3.appendChild(drawCard());
+        cardCount++;
+      }
+    }
+  } else {
+    // Determine winner
+  }
+});
 
 //winner    evaluation on who is closest to 21
 function winner() {
