@@ -16,30 +16,13 @@ var betsPlaced = [];
 var playerTurn = document.getElementById('player');
 var card = document.getElementById('card');
 var bet1 = document.getElementsByClassName('bet1')[0];
-var player1Card1 = document.getElementsByClassName('player1Card1')[0];
-var player1Card2 = document.getElementsByClassName('player1Card2')[0];
-var player1Card3 = document.getElementsByClassName('player1Card3')[0];
-var player1Card4 = document.getElementsByClassName('player1Card4')[0];
-var player1Card5 = document.getElementsByClassName('player1Card5')[0];
-var player1Card6 = document.getElementsByClassName('player1Card6')[0];
-var player1Card7 = document.getElementsByClassName('player1Card7')[0];
-var player1Card8 = document.getElementsByClassName('player1Card8')[0];
-var player1Card9 = document.getElementsByClassName('player1Card9')[0];
-var player1Card10 = document.getElementsByClassName('player1Card10')[0];
-var dealerCard1 = document.getElementsByClassName('dealerCard1')[0];
-var dealerCard2 = document.getElementsByClassName('dealerCard2')[0];
-var dealerCard3 = document.getElementsByClassName('dealerCard3')[0];
-var dealerCard4 = document.getElementsByClassName('dealerCard4')[0];
-var dealerCard5 = document.getElementsByClassName('dealerCard5')[0];
-var dealerCard6 = document.getElementsByClassName('dealerCard6')[0];
-var dealerCard7 = document.getElementsByClassName('dealerCard7')[0];
-var dealerCard8 = document.getElementsByClassName('dealerCard8')[0];
-var dealerCard9 = document.getElementsByClassName('dealerCard9')[0];
-var dealerCard10 = document.getElementsByClassName('dealerCard10')[0];
+var player1Box = document.getElementsByClassName('player1Box')[0];
+var dealerCardBox = document.getElementsByClassName('dealerCardBox')[0];
 var dealerCards;
 var dealerArray = [];
 var playerArray = [];
 var cardCount = 0;
+var beginGame = true;
 
 var cardsArray = [
   {
@@ -322,34 +305,44 @@ var drawCard = function() {
 //deal randomly give cards to player/dealer from a deck
 function deal() {
   if(bet1.textContent !== '' && bet1.textContent >= 5) {
-    var card = drawCard();
-    var cardElement = document.createElement('img');
-    cardElement.setAttribute('src', card.cardImage);
-    cardElement.setAttribute('class', 'image');
-    player1Card1.appendChild(cardElement);
-    playerArray.push(card.rank);
-    card = drawCard();
-    cardElement = document.createElement('img');
-    cardElement.setAttribute('src', card.cardImage);
-    cardElement.setAttribute('class', 'image');
-    dealerCard1.appendChild(cardElement);
-    dealerArray.push(card.rank);
-    card = drawCard();
-    cardElement = document.createElement('img');
-    cardElement.setAttribute('src', card.cardImage);
-    cardElement.setAttribute('class', 'image');
-    player1Card2.appendChild(cardElement);
-    playerArray.push(card.rank);
-    card = drawCard();
-    cardElement = document.createElement('img');
-    cardElement.setAttribute('src', card.cardImage);
-    cardElement.setAttribute('class', 'image');
-    dealerCard2.appendChild(cardElement);
-    dealerArray.push(card.rank);
-    var cardBack = document.createElement('img');
-    cardBack.setAttribute('src', 'images/red_back.png');
-    cardBack.setAttribute('class', 'cardBack');
-    dealerCard1.appendChild(cardBack);
+    if(beginGame === true) {
+      var card = drawCard();
+      var cardElement = document.createElement('img');
+      cardElement.setAttribute('src', card.cardImage);
+      cardElement.setAttribute('class', 'image');
+      player1Box.appendChild(cardElement);
+      playerArray.push(card.rank);
+      card = drawCard();
+      cardElement = document.createElement('img');
+      cardElement.setAttribute('src', card.cardImage);
+      cardElement.setAttribute('class', 'image');
+      dealerCardBox.appendChild(cardElement);
+      dealerArray.push(card.rank);
+      card = drawCard();
+      cardElement = document.createElement('img');
+      cardElement.setAttribute('src', card.cardImage);
+      cardElement.setAttribute('class', 'image');
+      player1Box.appendChild(cardElement);
+      playerArray.push(card.rank);
+      card = drawCard();
+      cardElement = document.createElement('img');
+      cardElement.setAttribute('src', card.cardImage);
+      cardElement.setAttribute('class', 'image');
+      dealerCardBox.appendChild(cardElement);
+      dealerArray.push(card.rank);
+      var cardBack = document.createElement('img');
+      cardBack.setAttribute('src', 'images/red_back.png');
+      cardBack.setAttribute('class', 'cardBack');
+      dealerCardBox.appendChild(cardBack);
+      beginGame = false;
+    } else {
+        var card = drawCard();
+        var cardElement = document.createElement('img');
+        cardElement.setAttribute('src', card.cardImage);
+        cardElement.setAttribute('class', 'image');
+        playerArray.push(card.rank);
+        player1Box.appendChild(cardElement);
+    }
   }
 }
 document.getElementById('deal').addEventListener("click", deal);
@@ -357,38 +350,7 @@ document.getElementById('deal').addEventListener("click", deal);
 // hit button
 // appending child to a new div each time hit button is clicked to stagger cards
 function hit() {
-  if(cardCount === 7) {
-    player1Card10.appendChild(drawCard());
-    cardCount++
-  }
-  if(cardCount === 6) {
-    player1Card9.appendChild(drawCard());
-    cardCount++
-  }
-  if(cardCount === 5) {
-    player1Card8.appendChild(drawCard());
-    cardCount++
-  }
-  if(cardCount === 4) {
-    player1Card7.appendChild(drawCard());
-    cardCount++
-  }
-  if(cardCount === 3) {
-    player1Card6.appendChild(drawCard());
-    cardCount++
-  }
-  if(cardCount === 2) {
-    player1Card5.appendChild(drawCard());
-    cardCount++
-  }
-  if(cardCount === 1){
-    player1Card4.appendChild(drawCard());
-    cardCount++;
-  }
-  if(cardCount === 0){
-    player1Card3.appendChild(drawCard());
-    cardCount++;
-  }
+  deal();
 }
 
 // player hits function
@@ -408,35 +370,35 @@ document.getElementById('stand').addEventListener('click', function() {
     function hit() {
       var cardCount = 0;
       if(cardCount === 7) {
-        dealerCard10.appendChild(drawCard());
+        dealerCardBox.appendChild(deal());
         cardCount++
       }
       if(cardCount === 6) {
-        dealerCard9.appendChild(drawCard());
+        dealerCardBox.appendChild(deal());
         cardCount++
       }
       if(cardCount === 5) {
-        dealerCard8.appendChild(drawCard());
+        dealerCardBox.appendChild(deal());
         cardCount++
       }
       if(cardCount === 4) {
-        dealerCard7.appendChild(drawCard());
+        dealerCardBox.appendChild(deal());
         cardCount++
       }
       if(cardCount === 3) {
-        dealerCard6.appendChild(drawCard());
+        dealerCardBox.appendChild(deal());
         cardCount++
       }
       if(cardCount === 2) {
-        dealerCard5.appendChild(drawCard());
+        dealerCardBox.appendChild(deal());
         cardCount++
       }
       if(cardCount === 1){
-        dealerCard4.appendChild(drawCard());
+        dealerCardBox.appendChild(deal());
         cardCount++;
       }
       if(cardCount === 0){
-        dealerCard3.appendChild(drawCard());
+        dealerCardBox.appendChild(deal());
         cardCount++;
       }
     }
