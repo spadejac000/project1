@@ -280,7 +280,7 @@ var cardsArray = [
   },
 ];
 
-//bet  place money on table
+//place chips on table
 document.getElementById('bet').addEventListener('click', function() {
   playerBet = document.getElementById('amount').value;
   if (player1 === true) {
@@ -288,7 +288,6 @@ document.getElementById('bet').addEventListener('click', function() {
   }
 });
 
-//hit / draw          draw a new card from a deck and add it to current hand value
 // This function draws a random card for anyone
 var drawCard = function() {
     return cardsArray[Math.floor(Math.random() * 52)];
@@ -341,19 +340,14 @@ function deal() {
 }
 document.getElementById('deal').addEventListener("click", deal);
 
-// hit button
-// appending child to a new div each time hit button is clicked to stagger cards
+// hit function
 function hit() {
   deal();
 }
 
 //stand     stop current player turn and go to next
-// function stand() {
-//
-// }
 document.getElementById('stand').addEventListener('click', function() {
   document.getElementById('hit').disabled = true;
-
   while (dealerArray.reduce(function(acc, curVal) {return acc + curVal}) < 17) {
     var card = drawCard();
     var cardElement = document.createElement('img');
@@ -362,10 +356,11 @@ document.getElementById('stand').addEventListener('click', function() {
     dealerCardBox.appendChild(cardElement);
     dealerArray.push(card.rank);
   }
-    // Determine winner
 });
 
-//winner    evaluation on who is closest to 21
+// Determine winner
 function winner() {
-
+  if(playerArray.reduce(function(acc, curVal) {return acc + curVal}) > dealerArray.reduce(function(acc, curVal) {return acc + curVal}) && playerArray.reduce(function(acc, curVal) {return acc + curVal}) < 22) {
+    
+  }
 }
