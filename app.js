@@ -1,11 +1,8 @@
 // global variables
 var dealer;
 var player1 = true;
-var numberOfPlayers;
 var playerBet;
 var bet = false;
-var skipTurn = false;
-var activePlayer = 1;
 var betsPlaced = [];
 var playerTurn = document.getElementById('player');
 var card = document.getElementById('card');
@@ -15,7 +12,7 @@ var dealerCardBox = document.getElementsByClassName('dealerCardBox')[0];
 var dealerCards;
 var dealerArray = [];
 var playerArray = [];
-var cardCount = 0;
+var cardCount = 1;
 var beginGame = true;
 var cardsArray = [
   {
@@ -284,47 +281,33 @@ var cardsArray = [
 document.getElementById('bet').addEventListener('click', function() {
   playerBet = document.getElementById('amount').value;
   if (player1 === true) {
-    document.getElementsByClassName('bet1')[0].textContent = playerBet;
+    bet1.textContent = playerBet;
   }
 });
 
 // This function draws a random card for anyone
 var drawCard = function() {
-    return cardsArray[Math.floor(Math.random() * 52)];
+    return cardsArray[Math.floor(Math.random() * 51)];
 }
 
 //deal randomly give cards to player/dealer from a deck
 function deal() {
   if(bet1.textContent !== '' && bet1.textContent >= 5) {
     if(beginGame === true) {
-      var card = drawCard();
-      var cardElement = document.createElement('img');
-      cardElement.setAttribute('src', card.cardImage);
-      cardElement.setAttribute('class', 'image');
-      player1Box.appendChild(cardElement);
-      playerArray.push(card.rank);
-      card = drawCard();
-      cardElement = document.createElement('img');
-      cardElement.setAttribute('src', card.cardImage);
-      cardElement.setAttribute('class', 'image');
-      dealerCardBox.appendChild(cardElement);
-      dealerArray.push(card.rank);
-      card = drawCard();
-      cardElement = document.createElement('img');
-      cardElement.setAttribute('src', card.cardImage);
-      cardElement.setAttribute('class', 'image');
-      player1Box.appendChild(cardElement);
-      playerArray.push(card.rank);
-      card = drawCard();
-      cardElement = document.createElement('img');
-      cardElement.setAttribute('src', card.cardImage);
-      cardElement.setAttribute('class', 'image');
-      dealerCardBox.appendChild(cardElement);
-      dealerArray.push(card.rank);
-      var cardBack = document.createElement('img');
-      cardBack.setAttribute('src', 'images/red_back.png');
-      cardBack.setAttribute('class', 'cardBack');
-      dealerCardBox.appendChild(cardBack);
+      for(var i = 0; i < 2; i++) {
+        var card = drawCard();
+        var cardElement = document.createElement('img');
+        cardElement.setAttribute('src', card.cardImage);
+        cardElement.setAttribute('class', 'image');
+        player1Box.appendChild(cardElement);
+        playerArray.push(card.rank);
+        var card = drawCard();
+        var cardElement = document.createElement('img');
+        cardElement.setAttribute('src', card.cardImage);
+        cardElement.setAttribute('class', 'image');
+        dealerCardBox.appendChild(cardElement);
+        dealerArray.push(card.rank);
+      }
       beginGame = false;
     }
     document.getElementById('hit').addEventListener('click', function (){
@@ -334,37 +317,32 @@ function deal() {
         cardElement.setAttribute('class', 'image');
         playerArray.push(card.rank);
         player1Box.appendChild(cardElement);
-        console.log(playerArray);
     });
   }
 }
-document.getElementById('deal').addEventListener("click", deal);
 
-// hit function
-function hit() {
-  deal();
+function stand() {
+  //stand     stop current player turn and go to next
+    document.getElementById('hit').disabled = true;
+    while (dealerArray.reduce(function(acc, curVal) {return acc + curVal}) < 17) {
+      var card = drawCard();
+      var cardElement = document.createElement('img');
+      cardElement.setAttribute('src', card.cardImage);
+      cardElement.setAttribute('class', 'image');
+      dealerCardBox.appendChild(cardElement);
+      dealerArray.push(card.rank);
+    }
+    var p1Total = checkForAce(playerArray);
+    var dealTotal = checkForAce(dealerArray);
+    winner(p1Total, dealTotal);
 }
 
-//stand     stop current player turn and go to next
-document.getElementById('stand').addEventListener('click', function() {
-  document.getElementById('hit').disabled = true;
-  while (dealerArray.reduce(function(acc, curVal) {return acc + curVal}) < 17) {
-    var card = drawCard();
-    var cardElement = document.createElement('img');
-    cardElement.setAttribute('src', card.cardImage);
-    cardElement.setAttribute('class', 'image');
-    dealerCardBox.appendChild(cardElement);
-    dealerArray.push(card.rank);
-  }
-  winner();
-});
-
 // Determine winner
-function winner() {
-  if(playerArray.reduce(function(acc, curVal) {return acc + curVal}) > dealerArray.reduce(function(acc, curVal) {return acc + curVal}) && playerArray.reduce(function(acc, curVal) {return acc + curVal}) < 22 || dealerArray.reduce(function(acc, curVal) {return acc + curVal}) > 21) {
+function winner(p1, deal) {
+  if((p1 > deal && p1 < 22) || (deal > 21 && p1 < 22)) {
       // player wins
       console.log('player wins');
-  } else if (playerArray.reduce(function(acc, curVal) {return acc + curVal}) < dealerArray.reduce(function(acc, curVal) {return acc + curVal}) && dealerArray.reduce(function(acc, curVal) {return acc + curVal}) < 22 || playerArray.reduce(function(acc, curVal) {return acc + curVal}) > 21) {
+  } else if ((p1 < deal && deal < 22) || (p1 > 21 && deal < 22) || p1 > 21) {
       // dealer wins.
       console.log('dealer wins');
   } else {
@@ -372,3 +350,36 @@ function winner() {
     console.log('NOBODY WINS!!!');
   }
 }
+
+function checkForAce(arr) {
+  var numOfAces = 0;
+  var total = 0;
+  for(var i = 0; i < arr.length; i++) {
+    if(arr[i] === 1) {
+      numOfAces++;
+    } else {
+        total = total + arr[i];
+    }
+  }
+  for(var i = 0; i < numOfAces; i++) {
+   if((total + 11) > 21) {
+     total = total + 1;
+     numOfAces--;
+   } else {
+      total = total + 11;
+   }
+  }
+  return total;
+}
+
+document.addEventListener("DOMContentLoaded", function(event) {
+  document.getElementById('deal').addEventListener("click", deal);
+  document.getElementById('stand').addEventListener('click', stand);
+});
+
+// to do list
+// replay without reloading
+// card back on second card for the dealer
+// card stacking done right
+// bets
+// 7 players
