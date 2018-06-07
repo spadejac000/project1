@@ -3,7 +3,6 @@ var dealer;
 var player1 = true;
 var playerBet;
 var bet = false;
-var betsPlaced = [];
 var playerTurn = document.getElementById('player');
 var card = document.getElementById('card');
 var bet1 = document.getElementsByClassName('bet1')[0];
@@ -12,7 +11,6 @@ var dealerCardBox = document.getElementsByClassName('dealerCardBox')[0];
 var dealerCards;
 var dealerArray = [];
 var playerArray = [];
-var cardCount = 1;
 var beginGame = true;
 var cardsArray = [
   {
@@ -381,5 +379,8 @@ document.addEventListener("DOMContentLoaded", function(event) {
 // replay without reloading
 // card back on second card for the dealer
 // card stacking done right
+// if player busts display a dealer wins
+// if player gets blackjack display a player wins
+// add sound to buttons
 // bets
 // 7 players
