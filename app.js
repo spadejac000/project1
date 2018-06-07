@@ -1,12 +1,6 @@
 // global variables
 var dealer;
 var player1 = true;
-var player2 = false;
-var player3 = false;
-var player4 = false;
-var player5 = false;
-var player6 = false;
-var player7 = false;
 var numberOfPlayers;
 var playerBet;
 var bet = false;
@@ -23,7 +17,6 @@ var dealerArray = [];
 var playerArray = [];
 var cardCount = 0;
 var beginGame = true;
-
 var cardsArray = [
   {
     rank: 1,
@@ -295,7 +288,6 @@ document.getElementById('bet').addEventListener('click', function() {
   }
 });
 
-
 //hit / draw          draw a new card from a deck and add it to current hand value
 // This function draws a random card for anyone
 var drawCard = function() {
@@ -335,14 +327,16 @@ function deal() {
       cardBack.setAttribute('class', 'cardBack');
       dealerCardBox.appendChild(cardBack);
       beginGame = false;
-    } else {
+    }
+    document.getElementById('hit').addEventListener('click', function (){
         var card = drawCard();
         var cardElement = document.createElement('img');
         cardElement.setAttribute('src', card.cardImage);
         cardElement.setAttribute('class', 'image');
         playerArray.push(card.rank);
         player1Box.appendChild(cardElement);
-    }
+        console.log(playerArray);
+    });
   }
 }
 document.getElementById('deal').addEventListener("click", deal);
@@ -353,58 +347,22 @@ function hit() {
   deal();
 }
 
-// player hits function
-document.getElementById('hit').addEventListener('click', hit);
-
 //stand     stop current player turn and go to next
 // function stand() {
 //
 // }
-
 document.getElementById('stand').addEventListener('click', function() {
   document.getElementById('hit').disabled = true;
-  if(dealerArray.value < 17) {
-    // Draw a card
-    // hit button
-    // appending child to a new div each time hit button is clicked to stagger cards
-    function hit() {
-      var cardCount = 0;
-      if(cardCount === 7) {
-        dealerCardBox.appendChild(deal());
-        cardCount++
-      }
-      if(cardCount === 6) {
-        dealerCardBox.appendChild(deal());
-        cardCount++
-      }
-      if(cardCount === 5) {
-        dealerCardBox.appendChild(deal());
-        cardCount++
-      }
-      if(cardCount === 4) {
-        dealerCardBox.appendChild(deal());
-        cardCount++
-      }
-      if(cardCount === 3) {
-        dealerCardBox.appendChild(deal());
-        cardCount++
-      }
-      if(cardCount === 2) {
-        dealerCardBox.appendChild(deal());
-        cardCount++
-      }
-      if(cardCount === 1){
-        dealerCardBox.appendChild(deal());
-        cardCount++;
-      }
-      if(cardCount === 0){
-        dealerCardBox.appendChild(deal());
-        cardCount++;
-      }
-    }
-  } else {
-    // Determine winner
+
+  while (dealerArray.reduce(function(acc, curVal) {return acc + curVal}) < 17) {
+    var card = drawCard();
+    var cardElement = document.createElement('img');
+    cardElement.setAttribute('src', card.cardImage);
+    cardElement.setAttribute('class', 'image');
+    dealerCardBox.appendChild(cardElement);
+    dealerArray.push(card.rank);
   }
+    // Determine winner
 });
 
 //winner    evaluation on who is closest to 21
