@@ -356,11 +356,19 @@ document.getElementById('stand').addEventListener('click', function() {
     dealerCardBox.appendChild(cardElement);
     dealerArray.push(card.rank);
   }
+  winner();
 });
 
 // Determine winner
 function winner() {
-  if(playerArray.reduce(function(acc, curVal) {return acc + curVal}) > dealerArray.reduce(function(acc, curVal) {return acc + curVal}) && playerArray.reduce(function(acc, curVal) {return acc + curVal}) < 22) {
-    
+  if(playerArray.reduce(function(acc, curVal) {return acc + curVal}) > dealerArray.reduce(function(acc, curVal) {return acc + curVal}) && playerArray.reduce(function(acc, curVal) {return acc + curVal}) < 22 || dealerArray.reduce(function(acc, curVal) {return acc + curVal}) > 21) {
+      // player wins
+      console.log('player wins');
+  } else if (playerArray.reduce(function(acc, curVal) {return acc + curVal}) < dealerArray.reduce(function(acc, curVal) {return acc + curVal}) && dealerArray.reduce(function(acc, curVal) {return acc + curVal}) < 22 || playerArray.reduce(function(acc, curVal) {return acc + curVal}) > 21) {
+      // dealer wins.
+      console.log('dealer wins');
+  } else {
+    // push. nobody wins.
+    console.log('NOBODY WINS!!!');
   }
 }
