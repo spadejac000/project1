@@ -292,17 +292,38 @@ var drawCard = function() {
 function deal() {
   if(bet1.textContent !== '' && bet1.textContent >= 5) {
     if(beginGame === true) {
-      for(var i = 0; i < 2; i++) {
         var card = drawCard();
         var cardElement = document.createElement('img');
         cardElement.setAttribute('src', card.cardImage);
-        cardElement.setAttribute('class', 'image');
+        cardElement.className = 'image';
         player1Box.appendChild(cardElement);
         playerArray.push(card.rank);
-        var card = drawCard();
-        var cardElement = document.createElement('img');
+        card = drawCard();
+        cardElement = document.createElement('img');
         cardElement.setAttribute('src', card.cardImage);
-        cardElement.setAttribute('class', 'image');
+        cardElement.className = 'image';
+        dealerCardBox.appendChild(cardElement);
+        dealerArray.push(card.rank);
+        card = drawCard();
+        cardElement = document.createElement('img');
+        cardElement.setAttribute('src', card.cardImage);
+        cardElement.className = 'image';
+        cardElement.style.top = "12px";
+        cardElement.style.left = "12px";
+        player1Box.appendChild(cardElement);
+        playerArray.push(card.rank);
+        cardElement = document.createElement('img');
+        cardElement.setAttribute('src', 'images/red_back.png');
+        cardElement.className = 'cardBack';
+        cardElement.style.top = "12px";
+        cardElement.style.left = "12px";
+        dealerCardBox.appendChild(cardElement);
+        card = drawCard();
+        cardElement = document.createElement('img');
+        cardElement.setAttribute('src', card.cardImage);
+        cardElement.className = 'image';
+        cardElement.style.top = "12px";
+        cardElement.style.left = "12px";
         dealerCardBox.appendChild(cardElement);
         dealerArray.push(card.rank);
       }
@@ -312,21 +333,32 @@ function deal() {
         var card = drawCard();
         var cardElement = document.createElement('img');
         cardElement.setAttribute('src', card.cardImage);
-        cardElement.setAttribute('class', 'image');
+        cardElement.className = 'image';
+        cardElement.style.top = (player1Box.children.length * 12).toString() + "px";
+        cardElement.style.left = (player1Box.children.length * 12).toString() + "px";
         playerArray.push(card.rank);
         player1Box.appendChild(cardElement);
     });
   }
+
+// function to remove card back
+function removeCardBack() {
+ var elem = document.getElementsByClassName('cardBack')[0];
+ console.log(elem);
+ dealerCardBox.removeChild(elem);
 }
 
 function stand() {
   //stand     stop current player turn and go to next
     document.getElementById('hit').disabled = true;
+    removeCardBack();
     while (dealerArray.reduce(function(acc, curVal) {return acc + curVal}) < 17) {
       var card = drawCard();
       var cardElement = document.createElement('img');
       cardElement.setAttribute('src', card.cardImage);
       cardElement.setAttribute('class', 'image');
+      cardElement.style.top = (dealerCardBox.children.length * 12).toString() + "px";
+      cardElement.style.left = (dealerCardBox.children.length * 12).toString() + "px";
       dealerCardBox.appendChild(cardElement);
       dealerArray.push(card.rank);
     }
@@ -378,9 +410,11 @@ document.addEventListener("DOMContentLoaded", function(event) {
 // to do list
 // replay without reloading
 // card back on second card for the dealer
-// card stacking done right
 // if player busts display a dealer wins
 // if player gets blackjack display a player wins
 // add sound to buttons
+// add instructions
+// create read me file
+// styling
 // bets
 // 7 players
