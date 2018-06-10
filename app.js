@@ -461,7 +461,3 @@ document.addEventListener("DOMContentLoaded", function(event) {
       bust();
   });
 });
-
-// to do list
-// create read me file
-// disable hit and stand buttons before clicking deal button
