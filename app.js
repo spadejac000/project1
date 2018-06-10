@@ -8,7 +8,6 @@ var card = document.getElementById('card');
 var bet1 = document.getElementsByClassName('bet1')[0];
 var player1Box = document.getElementsByClassName('player1Box')[0];
 var dealerCardBox = document.getElementsByClassName('dealerCardBox')[0];
-var dealerCards;
 var dealerArray = [];
 var playerArray = [];
 var beginGame = true;
