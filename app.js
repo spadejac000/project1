@@ -12,6 +12,8 @@ var dealerCards;
 var dealerArray = [];
 var playerArray = [];
 var beginGame = true;
+var p1Total = checkForAce(playerArray);
+var dealTotal = checkForAce(dealerArray);
 var cardsArray = [
   {
     rank: 1,
@@ -328,6 +330,9 @@ function deal() {
         dealerArray.push(card.rank);
       }
       beginGame = false;
+      p1Total = checkForAce(playerArray);
+      dealTotal = checkForAce(dealerArray);
+      blackJack();
     }
     document.getElementById('hit').addEventListener('click', function (){
         var card = drawCard();
@@ -338,13 +343,15 @@ function deal() {
         cardElement.style.left = (player1Box.children.length * 12).toString() + "px";
         playerArray.push(card.rank);
         player1Box.appendChild(cardElement);
+        p1Total = checkForAce(playerArray);
+        dealTotal = checkForAce(dealerArray);
+        bust();
     });
   }
 
 // function to remove card back
 function removeCardBack() {
  var elem = document.getElementsByClassName('cardBack')[0];
- console.log(elem);
  dealerCardBox.removeChild(elem);
 }
 
@@ -362,22 +369,48 @@ function stand() {
       dealerCardBox.appendChild(cardElement);
       dealerArray.push(card.rank);
     }
-    var p1Total = checkForAce(playerArray);
-    var dealTotal = checkForAce(dealerArray);
+    p1Total = checkForAce(playerArray);
+    dealTotal = checkForAce(dealerArray);
     winner(p1Total, dealTotal);
+}
+
+function blackJack() {
+  if(p1Total === 21 && dealTotal !== 21) {
+    document.getElementsByClassName('youWin')[0].style.display = 'block';
+    disableButtons();
+  } else if(dealTotal === 21 && p1Total !== 21) {
+    document.getElementsByClassName('dealerWins')[0].style.display = 'block';
+    // remove the card back
+    disableButtons();
+  } else if(dealTotal === 21 && p1Total === 21) {
+    // remove the card back
+    document.getElementsByClassName('nobodyWins')[0].style.display = 'block';
+    disableButtons();
+  } else {
+  }
+}
+
+function bust() {
+  if (p1Total > 21) {
+    document.getElementsByClassName('dealerWins')[0].style.display = 'block';
+    disableButtons();
+  }
 }
 
 // Determine winner
 function winner(p1, deal) {
   if((p1 > deal && p1 < 22) || (deal > 21 && p1 < 22)) {
       // player wins
-      console.log('player wins');
+      document.getElementsByClassName('youWin')[0].style.display = 'block';
+      disableButtons();
   } else if ((p1 < deal && deal < 22) || (p1 > 21 && deal < 22) || p1 > 21) {
       // dealer wins.
-      console.log('dealer wins');
+      document.getElementsByClassName('dealerWins')[0].style.display = 'block';
+      disableButtons();
   } else {
     // push. nobody wins.
-    console.log('NOBODY WINS!!!');
+    document.getElementsByClassName('nobodyWins')[0].style.display = 'block';
+    disableButtons();
   }
 }
 
@@ -402,16 +435,43 @@ function checkForAce(arr) {
   return total;
 }
 
+// This function disables all buttons except replay when youWin, dealerWins, or nobodyWins pops up
+function disableButtons() {
+  document.getElementById('bet').disabled = true;
+  document.getElementById('deal').disabled = true;
+  document.getElementById('hit').disabled = true;
+  document.getElementById('stand').disabled = true;
+}
+
+// This function clears the table
+function replay() {
+  document.getElementById('bet').disabled = false;
+  document.getElementById('deal').disabled = false;
+  document.getElementById('hit').disabled = false;
+  document.getElementById('stand').disabled = false;
+  playerArray = [];
+  dealerArray = [];
+  while (dealerCardBox.hasChildNodes()) {
+    dealerCardBox.removeChild(dealerCardBox.lastChild);
+  }
+  while (player1Box.hasChildNodes()) {
+    player1Box.removeChild(player1Box.lastChild);
+  }
+  document.getElementsByClassName('nobodyWins')[0].style.display = 'none';
+  document.getElementsByClassName('youWin')[0].style.display = 'none';
+  document.getElementsByClassName('dealerWins')[0].style.display = 'none';
+  bet1.textContent = '';
+  beginGame = true;
+}
+
 document.addEventListener("DOMContentLoaded", function(event) {
   document.getElementById('deal').addEventListener("click", deal);
   document.getElementById('stand').addEventListener('click', stand);
+  document.getElementById('replay').addEventListener('click', replay);
 });
 
 // to do list
 // replay without reloading
-// card back on second card for the dealer
-// if player busts display a dealer wins
-// if player gets blackjack display a player wins
 // add sound to buttons
 // add instructions
 // create read me file

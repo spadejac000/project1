@@ -56,6 +56,7 @@ body {
 #submit,
 #hit,
 #stand,
+#replay,
 label,
 input {
   width: 100px;
@@ -76,4 +77,23 @@ input {
   position: absolute;
   width: 80%;
   z-index: 50;
+}
+
+.youWin,
+.dealerWins,
+.nobodyWins {
+  position: absolute;
+  top: 250px;
+  left: 600px;
+  width: 200px;
+  height: 100px;
+  background-color: rgba(251, 251, 3, .7);
+  color: #933223;
+  border: 2px dashed #933233;
+  text-align: center;
+  font-size: 30px;
+  font-weight: bold;
+  z-index: 200;
+  border-radius: 5%;
+  display: none;
 }
