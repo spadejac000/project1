@@ -444,6 +444,8 @@ function replay() {
 }
 
 document.addEventListener("DOMContentLoaded", function(event) {
+  document.getElementById('hit').disabled = true;
+  document.getElementById('stand').disabled = true;
   document.getElementById('deal').addEventListener("click", deal);
   document.getElementById('stand').addEventListener('click', stand);
   document.getElementById('replay').addEventListener('click', replay);
