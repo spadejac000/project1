@@ -278,12 +278,12 @@ var cardsArray = [
 ];
 
 //place chips on table
-document.getElementById('bet').addEventListener('click', function() {
-  playerBet = document.getElementById('amount').value;
-  if (player1 === true) {
-    bet1.textContent = playerBet;
-  }
-});
+// document.getElementById('bet').addEventListener('click', function() {
+//   playerBet = document.getElementById('amount').value;
+//   if (player1 === true) {
+//     bet1.textContent = playerBet;
+//   }
+// });
 
 // This function draws a random card for anyone
 var drawCard = function() {
@@ -292,7 +292,7 @@ var drawCard = function() {
 
 //deal randomly give cards to player/dealer from a deck
 function deal() {
-  if(bet1.textContent !== '' && bet1.textContent >= 5) {
+  // if(bet1.textContent !== '' && bet1.textContent >= 5) {
     if(beginGame === true) {
         var card = drawCard();
         var cardElement = document.createElement('img');
@@ -333,7 +333,7 @@ function deal() {
       p1Total = checkForAce(playerArray);
       dealTotal = checkForAce(dealerArray);
       blackJack();
-    }
+    // }
     document.getElementById('hit').addEventListener('click', function (){
         var card = drawCard();
         var cardElement = document.createElement('img');
@@ -437,7 +437,7 @@ function checkForAce(arr) {
 
 // This function disables all buttons except replay when youWin, dealerWins, or nobodyWins pops up
 function disableButtons() {
-  document.getElementById('bet').disabled = true;
+  // document.getElementById('bet').disabled = true;
   document.getElementById('deal').disabled = true;
   document.getElementById('hit').disabled = true;
   document.getElementById('stand').disabled = true;
@@ -445,7 +445,7 @@ function disableButtons() {
 
 // This function clears the table
 function replay() {
-  document.getElementById('bet').disabled = false;
+  // document.getElementById('bet').disabled = false;
   document.getElementById('deal').disabled = false;
   document.getElementById('hit').disabled = false;
   document.getElementById('stand').disabled = false;

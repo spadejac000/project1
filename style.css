@@ -51,6 +51,11 @@ body {
   padding: .5em;
 }
 
+#instructions {
+  width: 200px;
+  font-size: 30px;
+}
+
 #deal,
 #bet,
 #submit,
@@ -59,7 +64,7 @@ body {
 #replay,
 label,
 input {
-  width: 100px;
+  width: 130px;
   font-size: 30px;
 }
 

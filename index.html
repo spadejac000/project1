@@ -3,19 +3,44 @@
   <head>
     <meta charset="utf-8">
     <title>Spade's Blackjack</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous">
     <link rel="stylesheet" href="style.css">
+
   </head>
   <body>
     <img class="table" src="images/blackjack-table.png">
     <div class="dealerCardBox" id="dealer"></div>
     <div class="player1Box player"></div>
     <div class="bet bet1"><span class="bet1"></span></div>
-    <div class="bet bet2"></div>
-    <div class="bet bet3"></div>
-    <div class="bet bet4"></div>
-    <div class="bet bet5"></div>
-    <div class="bet bet6"></div>
-    <div class="bet bet7"></div>
+        <!-- Modal -->
+    <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+          <div class="modal-header text-center">
+            <h5 class="modal-title text-center display-4 ml-5 pl-5" id="exampleModalCenterTitle"><strong>Instructions</strong></h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <h2 class="text-center">OBJECT OF THE GAME</h2>
+            <p>Attempt to beat the dealer by getting a count as close to 21 as possible, without going over 21.</p>
+            <h2 class="text-center">CARD VALUES/SCORING</h2>
+            <p>It is up to the player if an ace is worth 1 or 11. Face cards are 10 and any other card is its pip value.</p>
+            <h2 class="text-center">THE DEAL</h2>
+            <p>The dealer gives one card face up to the player in rotation clockwise, and then one card face up to himself. Another round of cards is then dealt face up to the player, but the dealer takes his second card face down. Thus, the player receives two cards face up, and the dealer receives one card face up and one card face down.</p>
+            <h2 class="text-center">THE PLAY</h2>
+            <p>The player must decide whether to "stand" (not ask for another card) or "hit" (ask for another card in an attempt to get closer to a count of 21, or even hit 21 exactly). Thus, the player may stand on the two cards originally dealt him, or he may ask the dealer for additional cards, one at a time, until he either decides to stand on the total (if it is 21 or under), or goes "bust" (if it is over 21). In the latter case, the player loses and the dealer collects the bet wagered. The combination of an ace with a card other than a ten-card is known as a "soft hand," because the player can count the ace as a 1 or 11, and either draw cards or not. For example with a "soft 17" (an ace and a 6), the total is 7 or 17. While a count of 17 is a good hand, the player may wish to draw for a higher total. If the draw creates a bust hand by counting the ace as an 11, the player simply counts the ace as a 1 and continues playing by standing or "hitting" (asking the dealer for additional cards, one at a time).
+            </p>
+            <h2 class="text-center">THE DEALER'S PLAY</h2>
+            <p>When the dealer has served every player, his face-down card is turned up. If the total is 17 or more, he must stand. If the total is 16 or under, he must take a card. He must continue to take cards until the total is 17 or more, at which point the dealer must stand. If the dealer has an ace, and counting it as 11 would bring his total to 17 or more (but not over 21), he must count the ace as 11 and stand. The dealer's decisions, then, are automatic on all plays, whereas the player always has the option of taking one or more cards.</p>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          </div>
+        </div>
+      </div>
+    </div>
     <div class="youWin">
       <p>You Win!</p>
     </div>
@@ -25,15 +50,22 @@
     <div class="nobodyWins">
       <p>NOBODY WINS!!!</p>
     </div>
-    <form class="panel">
-      <label for="">Place Your Bet:</label>
+    <form class="panel mt-5">
+      <!-- Button trigger modal -->
+      <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#exampleModalCenter" id="instructions">
+        Instructions
+      </button>
+      <!-- <label for="">Place Your Bet:</label>
       <input type="text" name="" value="" id="amount">
-      <button type="button" name="button" id="bet">Bet</button>
-      <button type="button" name="button" id="deal">Deal</button>
-      <button type="button" name="button" id="hit">Hit!</button>
-      <button type="button" name="button" id="stand">Stand</button>
-      <button type="button" name="button" id="replay">Replay</button>
+      <button type="button" name="button" id="bet">Bet</button> -->
+      <button type="button" class="btn btn-warning" id="deal">Deal</button>
+      <button type="button" class="btn btn-warning" id="hit">Hit!</button>
+      <button type="button" class="btn btn-warning" id="stand">Stand</button>
+      <button type="button" class="btn btn-warning" id="replay">Replay</button>
     </form>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js" integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T" crossorigin="anonymous"></script>
     <script src="app.js"></script>
   </body>
 </html>
