@@ -1,7 +1,10 @@
 body {
+  background-color: #933223;
+}
+
+.wrapper {
   width: 70%;
   margin: auto;
-  background-color: #933223;
 }
 
 .table {
