@@ -326,19 +326,6 @@ function deal() {
       dealTotal = checkForAce(dealerArray);
       blackJack();
     // }
-    document.getElementById('hit').addEventListener('click', function (){
-        var card = drawCard();
-        var cardElement = document.createElement('img');
-        cardElement.setAttribute('src', card.cardImage);
-        cardElement.className = 'image';
-        cardElement.style.top = (player1Box.children.length * 12).toString() + "px";
-        cardElement.style.left = (player1Box.children.length * 12).toString() + "px";
-        playerArray.push(card.rank);
-        player1Box.appendChild(cardElement);
-        p1Total = checkForAce(playerArray);
-        dealTotal = checkForAce(dealerArray);
-        bust();
-    });
   }
 
 // function to remove card back
@@ -460,13 +447,27 @@ document.addEventListener("DOMContentLoaded", function(event) {
   document.getElementById('deal').addEventListener("click", deal);
   document.getElementById('stand').addEventListener('click', stand);
   document.getElementById('replay').addEventListener('click', replay);
+  document.getElementById('hit').addEventListener('click', function (){
+      var card = drawCard();
+      var cardElement = document.createElement('img');
+      cardElement.setAttribute('src', card.cardImage);
+      cardElement.className = 'image';
+      cardElement.style.top = (player1Box.children.length * 12).toString() + "px";
+      cardElement.style.left = (player1Box.children.length * 12).toString() + "px";
+      playerArray.push(card.rank);
+      player1Box.appendChild(cardElement);
+      p1Total = checkForAce(playerArray);
+      dealTotal = checkForAce(dealerArray);
+      bust();
+  });
 });
 
 // to do list
-// replay without reloading
 // add sound to buttons
 // add instructions
 // create read me file
 // styling
 // bets
 // 7 players
+// remove card back when dealer has blackJack
+// disable hit and stand buttons before clicking deal button
