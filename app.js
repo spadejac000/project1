@@ -277,14 +277,6 @@ var cardsArray = [
   },
 ];
 
-//place chips on table
-// document.getElementById('bet').addEventListener('click', function() {
-//   playerBet = document.getElementById('amount').value;
-//   if (player1 === true) {
-//     bet1.textContent = playerBet;
-//   }
-// });
-
 // This function draws a random card for anyone
 var drawCard = function() {
     return cardsArray[Math.floor(Math.random() * 51)];
