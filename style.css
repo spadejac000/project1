@@ -89,6 +89,11 @@ input {
   display: none;
 }
 
+h5 {
+  width: 200px;
+  margin: auto;
+}
+
 @media (min-width: 500px) {
 
   .wrapper {
