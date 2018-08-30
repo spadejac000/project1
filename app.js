@@ -1,19 +1,36 @@
 // global variables
-var dealer;
-var player1 = true;
-var playerBet;
-var bet = false;
-var playerTurn = document.getElementById('player');
-var card = document.getElementById('card');
-var bet1 = document.getElementsByClassName('bet1')[0];
-var player1Box = document.getElementsByClassName('player1Box')[0];
-var dealerCardBox = document.getElementsByClassName('dealerCardBox')[0];
-var dealerArray = [];
-var playerArray = [];
-var beginGame = true;
-var p1Total = checkForAce(playerArray);
-var dealTotal = checkForAce(dealerArray);
-var cardsArray = [
+let dealer;
+let player1 = true;
+let playerBet;
+let bet = false;
+let playerTurn = document.getElementById('player');
+let card = document.getElementById('card');
+let bet1 = document.getElementById('bet1');
+let betAmount = document.getElementById('betAmount');
+let yourMoney = document.getElementById('yourMoney');
+let doubleDownButton = document.getElementById('double-down');
+let splitButton = document.getElementById('split-button');
+let splitHitButton = document.getElementById('splitHitButton');
+let cardBack = document.getElementsByClassName('cardBack')[0]
+let player1Box = document.getElementsByClassName('player1Box')[0];
+let dealerCardBox = document.getElementsByClassName('dealerCardBox')[0];
+let tieGame = document.getElementsByClassName('nobodyWins')[0];
+let dealerWins = document.getElementsByClassName('dealerWins')[0];
+let youWin = document.getElementsByClassName('youWin')[0];
+let extraBet = document.getElementsByClassName('extra-bet')[0];
+let extraPlayerBox = document.getElementsByClassName('extraPlayerBox')[0];
+let amountOfMoney = document.getElementsByClassName('amountOfMoney')[0];
+let dealerArray = [];
+let playerArray = [];
+let secondPlayerArray = [];
+let newPlayerArray = [];
+let beginGame = true;
+let p1Total = checkForAce(playerArray);
+let newP1Total = checkForAce(newPlayerArray);
+let secondP1Total = checkForAce(secondPlayerArray);
+let dealTotal = checkForAce(dealerArray);
+let splitBox = player1Box.cloneNode(false);
+let cardsArray = [
   {
     rank: 1,
     suit: "clubs",
@@ -276,6 +293,17 @@ var cardsArray = [
   },
 ];
 
+// This function allows you to make a bet
+const placeBet = () => {
+  let bet1 = document.getElementById('bet1');
+  if (betAmount.value > parseInt(yourMoney.innerHTML)) {
+    alert("You don't have enough money, Stupid!");
+} else if (betAmount.value >= 5) {
+    amountOfMoney.innerHTML = betAmount.value;
+    amountOfMoney.style.display = 'inline-block';
+  }
+};
+
 // This function draws a random card for anyone
 var drawCard = function() {
     return cardsArray[Math.floor(Math.random() * 51)];
@@ -322,10 +350,79 @@ function deal() {
       document.getElementById('hit').disabled = false;
       document.getElementById('stand').disabled = false;
       beginGame = false;
-      p1Total = checkForAce(playerArray);
+      if(!splitBox.hasChildNodes()) {
+        p1Total = checkForAce(playerArray);
+      } else {
+        newP1Total = checkForAce(newPlayerArray);
+      }
       dealTotal = checkForAce(dealerArray);
       blackJack();
   }
+
+// function to double your money before 
+let doubleDown = () => {
+  if(betAmount.value * 2 < yourMoney.innerHTML) {
+  betAmount.value *= 2;
+  amountOfMoney.innerHTML *= 2;
+  const copy = bet1.cloneNode(true);
+  var card = drawCard();
+  var cardElement = document.createElement('img');
+  cardElement.setAttribute('src', card.cardImage);
+  cardElement.className = 'image';
+  player1Box.appendChild(cardElement).style.transform = 'rotate(90deg) translateX(50px) translateY(-45px)';
+  playerArray.push(card.rank);
+  card = drawCard();
+  stand();
+  } else {
+    alert("you don't have enough money, Stupid!")
+  }
+}
+
+// This function is when you're delt a card without hitting
+var autoDraw = () => {
+  let card = drawCard();
+  let cardElement = document.createElement('img');
+  cardElement.setAttribute('src', card.cardImage);
+  cardElement.className = 'image';
+  player1Box.appendChild(cardElement).setAttribute('style', 'top: 12px; left: 12px;');
+  playerArray.push(card.rank);
+  card = drawCard();
+}
+
+// This function allows you to split your initial hand before you hit
+const split = () => {
+  betAmount.value *= 2;
+  amountOfMoney.innerHTML *= 2;
+  extraPlayerBox.appendChild(splitBox).style.transform = 'translateX(100px)';
+  splitBox.appendChild(player1Box.childNodes[1]).style.top = '0px';
+  player1Box.childNodes.clean = function(deleteValue) {
+    for (var i = 0; i < this.length; i++) {
+      if (this[i] == deleteValue) {         
+        this.splice(i, 1);
+        i--;
+      }
+    }
+    return this;
+  };
+  autoDraw();
+  let card = drawCard();
+  let cardElement = document.createElement('img');
+  cardElement.setAttribute('src', card.cardImage);
+  cardElement.className = 'image';
+  splitBox.appendChild(cardElement).setAttribute('style', 'top: 12px; left: 24px;');
+  playerArray.push(card.rank);
+  card = drawCard();
+  secondPlayerArray = [];
+  for (let i=0;i<playerArray.length;i++){
+      if ((i+2)%2==0) {
+          newPlayerArray.push(playerArray[i]);
+      }
+      else {
+        secondPlayerArray.push(playerArray[i]);
+      }
+  }
+  extraPlayerBox.insertBefore(splitHitButton, splitBox).setAttribute('style', 'display: block; transform: translateX(150px)');
+}
 
 // function to remove card back
 function removeCardBack() {
@@ -333,9 +430,33 @@ function removeCardBack() {
  dealerCardBox.removeChild(elem);
 }
 
+const hitSplitHand = () => {
+  if(splitBox.childNodes.length === 2) {
+    var card = drawCard();
+    var cardElement = document.createElement('img');
+    cardElement.setAttribute('src', card.cardImage);
+    cardElement.setAttribute('class', 'image');
+    cardElement.style.top = (splitBox.children.length * 12).toString() + "px";
+    cardElement.style.left = (splitBox.children.length * 18).toString() + "px";
+    splitBox.appendChild(cardElement);
+    secondPlayerArray.push(card.rank);
+  } else {
+    var card = drawCard();
+    var cardElement = document.createElement('img');
+    cardElement.setAttribute('src', card.cardImage);
+    cardElement.setAttribute('class', 'image');
+    cardElement.style.top = (splitBox.children.length * 12).toString() + "px";
+    cardElement.style.left = (splitBox.children.length * 18).toString() + "px";
+    splitBox.appendChild(cardElement);
+    secondPlayerArray.push(card.rank);
+    p1Total = checkForAce(secondPlayerArray);
+    dealTotal = checkForAce(dealerArray);
+    winner(p1Total, dealTotal);
+  }
+}
+
 function stand() {
-  //stand     stop current player turn and go to next
-    document.getElementById('hit').disabled = true;
+    // document.getElementById('hit').disabled = true;
     removeCardBack();
     while (dealerArray.reduce(function(acc, curVal) {return acc + curVal}) < 17) {
       var card = drawCard();
@@ -373,8 +494,13 @@ function blackJack() {
 function bust() {
   if (p1Total > 21) {
     document.getElementsByClassName('dealerWins')[0].style.display = 'block';
+    yourMoney.innerHTML = parseInt(yourMoney.innerHTML) - parseInt(amountOfMoney.innerHTML);
     disableButtons();
   }
+}
+
+var clearBet = () => {
+  bet1.innerHTML = "";
 }
 
 // Determine winner
@@ -382,15 +508,17 @@ function winner(p1, deal) {
   if((p1 > deal && p1 < 22) || (deal > 21 && p1 < 22)) {
       // player wins
       document.getElementsByClassName('youWin')[0].style.display = 'block';
-      disableButtons();
+      yourMoney.innerHTML = parseInt(yourMoney.innerHTML) + parseInt(amountOfMoney.innerHTML);
+      // disableButtons();
   } else if ((p1 < deal && deal < 22) || (p1 > 21 && deal < 22) || p1 > 21) {
       // dealer wins.
       document.getElementsByClassName('dealerWins')[0].style.display = 'block';
-      disableButtons();
+      yourMoney.innerHTML = parseInt(yourMoney.innerHTML) - parseInt(amountOfMoney.innerHTML);
+      // disableButtons();
   } else {
     // push. nobody wins.
     document.getElementsByClassName('nobodyWins')[0].style.display = 'block';
-    disableButtons();
+    // disableButtons();
   }
 }
 
@@ -418,14 +546,14 @@ function checkForAce(arr) {
 // This function disables all buttons except replay when youWin, dealerWins, or nobodyWins pops up
 function disableButtons() {
   document.getElementById('deal').disabled = true;
-  document.getElementById('hit').disabled = true;
+  // document.getElementById('hit').disabled = true;
   document.getElementById('stand').disabled = true;
 }
 
 // This function clears the table
 function replay() {
   document.getElementById('deal').disabled = false;
-  document.getElementById('hit').disabled = true;
+  // document.getElementById('hit').disabled = true;
   document.getElementById('stand').disabled = true;
   playerArray = [];
   dealerArray = [];
@@ -438,8 +566,49 @@ function replay() {
   document.getElementsByClassName('nobodyWins')[0].style.display = 'none';
   document.getElementsByClassName('youWin')[0].style.display = 'none';
   document.getElementsByClassName('dealerWins')[0].style.display = 'none';
-  bet1.textContent = '';
+  clearBet();
   beginGame = true;
+}
+
+var hit = () => {
+  var card = drawCard();
+  var cardElement = document.createElement('img');
+  cardElement.setAttribute('src', card.cardImage);
+  cardElement.className = 'image';
+  cardElement.style.top = (player1Box.children.length * 12).toString() + "px";
+  cardElement.style.left = (player1Box.children.length * 12).toString() + "px";
+  player1Box.appendChild(cardElement);
+  if(!splitBox.hasChildNodes()) {
+    playerArray.push(card.rank);
+    p1Total = checkForAce(playerArray);
+  } else {
+    newPlayerArray.push(card.rank);
+    p1Total = checkForAce(newPlayerArray);
+  }
+  dealTotal = checkForAce(dealerArray);
+  bust();
+}
+
+const splitHit = () => {
+  if (dealerWins.style.display === 'block') {
+    dealerWins.style.display = 'none';
+  } else if (youWin.style.display === 'block') {
+    youWin.style.display = 'none';
+  } else if (tieGame.style.display === 'block') {
+    tieGame.style.display = 'none';
+  }
+  var card = drawCard();
+  var cardElement = document.createElement('img');
+  cardElement.setAttribute('src', card.cardImage);
+  cardElement.className = 'image';
+  cardElement.style.top = (splitBox.children.length * 12).toString() + "px";
+  cardElement.style.left = (splitBox.children.length * 18).toString() + "px";
+  splitBox.appendChild(cardElement);
+  secondPlayerArray.push(card.rank);
+  p1Total = checkForAce(secondPlayerArray);
+  dealTotal = checkForAce(dealerArray);
+  bust();
+  console.log(secondPlayerArray);
 }
 
 document.addEventListener("DOMContentLoaded", function(event) {
@@ -448,17 +617,9 @@ document.addEventListener("DOMContentLoaded", function(event) {
   document.getElementById('deal').addEventListener("click", deal);
   document.getElementById('stand').addEventListener('click', stand);
   document.getElementById('replay').addEventListener('click', replay);
-  document.getElementById('hit').addEventListener('click', function (){
-      var card = drawCard();
-      var cardElement = document.createElement('img');
-      cardElement.setAttribute('src', card.cardImage);
-      cardElement.className = 'image';
-      cardElement.style.top = (player1Box.children.length * 12).toString() + "px";
-      cardElement.style.left = (player1Box.children.length * 12).toString() + "px";
-      playerArray.push(card.rank);
-      player1Box.appendChild(cardElement);
-      p1Total = checkForAce(playerArray);
-      dealTotal = checkForAce(dealerArray);
-      bust();
-  });
+  document.getElementById('double-down').addEventListener('click', doubleDown);
+  splitButton.addEventListener('click', split);
+  splitHitButton.addEventListener('click', splitHit);
+  document.getElementById('hit').addEventListener('click', hit);
+  document.getElementById('bet').addEventListener('click', placeBet);
 });

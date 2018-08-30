@@ -2,6 +2,31 @@ body {
   background-color: #933223;
 }
 
+/* background */
+
+body > div:nth-child(2) > div > div.col-md-9 {
+  padding: 0px;
+}
+
+body > div:nth-child(2) > div > div.col-md-9 > img {
+  height: 100%;
+}
+
+.card-table-top {
+  background: url('images/card-table-felt.jpg');
+  background-size: cover;
+}
+
+body > div:nth-child(2) > div > div.col-md-3 {
+  background-color: rgba(0, 0, 0, .5);
+}
+
+/* Navbar */
+
+nav {
+  box-shadow: 1px 1px 1px;
+}
+
 .wrapper {
   width: 100%;
   margin: auto;
@@ -14,21 +39,66 @@ body {
 
 .dealerCardBox,
 .player1Box {
-  width: 50px;
-  height: 50px;
+  position: relative;
+  width: 10em;
+  height: 10em;
+  z-index: 1000;
+}
+
+/* Bet div element styles */
+
+.bet {
+  height: 100px;
+  width: 200px;
+  background: url('images/chip_stack.png');
+  background-size: cover;
+  color: rgba(0, 0, 0, 0);
+  font-size: 2em;
+  font-weight: bold;
   z-index: 100;
+  display: block;
+  margin: 1em;
 }
 
-.dealerCardBox {
-  position: absolute;
-  top: 20px;
-  left: 180px;
+.bet,
+.equals {
+  display: inline-block;
+  vertical-align: top;
 }
 
-.player1Box {
-  position: absolute;
-  top: 100px;
-  left: 30px;
+.equals {
+  font-size: 6em;
+  color: goldenrod;
+}
+
+.amountOfMoney {
+  font-size: 6em;
+  color: goldenrod;
+  margin-left: .5em;
+}
+
+/* Your Money */
+
+.money,
+body > nav.navbar.navbar-expand-lg.navbar-dark.bg-dark > h1 {
+  display: inline-block;
+  background-color: darkgreen;
+  color: goldenrod;
+  padding: 1em;
+  border: 3px solid black;
+  border-radius: 1em;
+}
+
+/* Panel */
+
+.howMuch {
+  color: goldenrod;
+}
+
+#betAmount {
+  background-color: #933223;
+  color: goldenrod;
+  border-color: goldenrod;
 }
 
 #instructions {
@@ -42,7 +112,7 @@ body {
 #submit,
 #hit,
 #stand,
-#replay,
+#replay
 label,
 input {
   width: 100px;
@@ -58,15 +128,18 @@ input {
   margin: auto;
 }
 
+body > div:nth-child(2) > div > div.col-md-2 {
+  background-color: rgba(0, 0, 0, .5);
+}
+
 .image{
-  position: absolute;
-  width: 80%;
+  width: 100%;
   z-index: 1;
 }
 
 .cardBack {
   position: absolute;
-  width: 80%;
+  width: 40%;
   z-index: 50;
 }
 
@@ -74,10 +147,8 @@ input {
 .dealerWins,
 .nobodyWins {
   position: absolute;
-  top: 50px;
-  left: 150px;
-  width: 100px;
-  height: 70px;
+  width: 100%;
+  height: 100px;
   background-color: rgba(251, 251, 3, .7);
   color: #933223;
   border: 1px dashed #933233;
@@ -85,7 +156,6 @@ input {
   font-size: 15px;
   font-weight: bold;
   z-index: 200;
-  border-radius: 5%;
   display: none;
 }
 
@@ -108,18 +178,6 @@ h5 {
     z-index: 100;
   }
 
-  .dealerCardBox {
-    position: absolute;
-    top: 50px;
-    left: 660px;
-  }
-
-  .player1Box {
-    position: absolute;
-    top: 250px;
-    left: 270px;
-  }
-
   #instructions {
     width: 200px;
     font-size: 30px;
@@ -132,11 +190,15 @@ h5 {
   #hit,
   #stand,
   #replay,
+  #double-down,
+  #instructions,
+  #split-button,
   label,
   input {
-    width: 130px;
+    width: 100%;
     font-size: 30px;
     display: inline-block;
+    margin-bottom: 1em;
   }
 
   .panel {
@@ -146,23 +208,22 @@ h5 {
 
   .image{
     position: absolute;
-    width: 80%;
+    width: 100%;
     z-index: 1;
   }
 
   .cardBack {
     position: absolute;
-    width: 80%;
+    width: 100%;
     z-index: 50;
   }
 
   .youWin,
   .dealerWins,
+  .youBusted,
   .nobodyWins {
     position: absolute;
-    top: 250px;
-    left: 600px;
-    width: 200px;
+    width: 100%;
     height: 100px;
     background-color: rgba(251, 251, 3, .7);
     color: #933223;
@@ -171,7 +232,67 @@ h5 {
     font-size: 30px;
     font-weight: bold;
     z-index: 200;
-    border-radius: 5%;
     display: none;
   }
+}
+
+body > nav > h1 {
+  color: goldenrod;
+}
+
+/* shows what split hand is being played */
+.switchHand {
+  width: 150px;
+  height: 50px;
+  border-radius: 1em;
+  background-color: red;
+  position: relative;
+  -webkit-animation-name: example; /* Safari 4.0 - 8.0 */
+  -webkit-animation-duration: 1s; /* Safari 4.0 - 8.0 */
+  animation-name: example;
+  animation-duration: 1s;
+}
+
+/* Safari 4.0 - 8.0 */
+@-webkit-keyframes example {
+  0%   {background-color:red; left:0px; top:0px;}
+  100%  {background-color:yellow; left:200px; top:0px;}
+}
+
+/* Standard syntax */
+@keyframes example {
+  0%   {background-color:red; left:0px; top:0px;}
+  100%  {background-color:yellow; left:200px; top:0px;}
+}
+
+/* sides of the table */
+
+.player1Box,
+.dealerCardBox {
+  margin: 1em;
+}
+
+/* Player Side */
+
+.playerLabel {
+  color: goldenrod;
+  border-bottom: 4px solid goldenrod;
+}
+
+/* dealer Side */
+
+.dealerLabel {
+  color: goldenrod;
+  border-bottom: 4px solid goldenrod;
+}
+
+/* split hand styles */
+
+#splitHitButton {
+  display: none;
+}
+
+.player1Box,
+.extraPlayerBox {
+  display: inline-block;
 }
