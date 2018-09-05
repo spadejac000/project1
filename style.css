@@ -45,6 +45,15 @@ nav {
   z-index: 1000;
 }
 
+#navbarNavAltMarkup > div {
+  margin: 0 auto;
+}
+
+#navbarNavAltMarkup > div > h1 {
+  font-size: 3em;
+  font-family: 'Uncial Antiqua', cursive;
+}
+
 /* Bet div element styles */
 
 .bet {
@@ -66,6 +75,10 @@ nav {
   vertical-align: top;
 }
 
+.amountOfMoney {
+  display: inline-block;
+}
+
 .equals {
   font-size: 6em;
   color: goldenrod;
@@ -77,16 +90,27 @@ nav {
   margin-left: .5em;
 }
 
+.usersMoney {
+  margin: auto;
+  background-color: rgba(0, 0, 0, .5);
+  text-align: center;
+}
+
 /* Your Money */
 
-.money,
-body > nav.navbar.navbar-expand-lg.navbar-dark.bg-dark > h1 {
+.money {
   display: inline-block;
   background-color: darkgreen;
   color: goldenrod;
   padding: 1em;
   border: 3px solid black;
   border-radius: 1em;
+}
+
+body > nav.navbar.navbar-expand-lg.navbar-dark.bg-dark > h1 {
+  color: white;
+  font-size: 5em;
+  text-align: center;
 }
 
 /* Panel */
@@ -112,7 +136,9 @@ body > nav.navbar.navbar-expand-lg.navbar-dark.bg-dark > h1 {
 #submit,
 #hit,
 #stand,
-#replay
+#replay,
+#double-down,
+#split-button,
 label,
 input {
   width: 100px;
@@ -224,7 +250,7 @@ h5 {
   .nobodyWins {
     position: absolute;
     width: 100%;
-    height: 100px;
+    height: 164px;
     background-color: rgba(251, 251, 3, .7);
     color: #933223;
     border: 2px dashed #933233;
@@ -288,11 +314,105 @@ body > nav > h1 {
 
 /* split hand styles */
 
-#splitHitButton {
+.splitButtonsContainer {
   display: none;
+  background: rgba(0, 0, 0, .5);
+  padding: .5em;
 }
 
 .player1Box,
 .extraPlayerBox {
   display: inline-block;
+}
+
+.row {
+  width: 101.1%;
+}
+
+/* Footer */
+
+.footer-design {
+  margin: 0 auto;
+}
+
+/* mobile device design */
+
+@media (max-width: 600px) {
+
+  .howMuch {
+    display: block;
+  }
+
+  body > div:nth-child(2) > div {
+    margin-left: 0px;
+  }
+
+  #deal,
+  #bet,
+  #submit,
+  #hit,
+  #stand,
+  #replay,
+  #double-down,
+  #split-button,
+  label,
+  input {
+    margin-bottom: .2em;
+    display: inline-block;
+  }
+
+  body > div:nth-child(2) > div > div.col-md-3 {
+    padding-left: 0px;
+  }
+
+  body > div:nth-child(2) > div > div.col-md-3 > form {
+    width: 90%;
+  }
+
+  #instructions,
+  #replay {
+    margin-bottom: 1em;
+  }
+
+  #double-down {
+    padding-right: 7em;
+  }
+
+  body > div:nth-child(2) > div > div.col-md-9.card-table-top > div:nth-child(3) > p {
+    display: none;
+  }
+
+  #bet1 {
+    margin: 1em;
+    left: 0;
+    width: 3em;
+    height: 1.5em;
+    background-size: 100%;
+  }
+
+  #bet1,
+  .equals,
+  .amountOfMoney {
+    vertical-align: top;
+  }
+
+  .equals {
+    font-size: 4em;
+    padding-right: .5em;
+  }
+
+  .amountOfMoney {
+    margin-left: 0px;
+    font-size: 4em;
+  }
+
+  .image {
+    width: 100%;
+  }
+
+  .player1Box,
+  .dealerCardBox {
+    width: 5em;
+  }
+
 }
