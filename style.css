@@ -408,11 +408,16 @@ body > nav > h1 {
 
   .image {
     width: 100%;
+    position: absolute;
   }
 
   .player1Box,
   .dealerCardBox {
     width: 5em;
+  }
+
+  .cardBack {
+    width: 100%;
   }
 
 }
