@@ -15,6 +15,8 @@ body > div:nth-child(2) > div > div.col-md-9 > img {
 .card-table-top {
   background: url('images/card-table-felt.jpg');
   background-size: cover;
+  padding-right: 0px;
+  padding-left: 0px;
 }
 
 body > div:nth-child(2) > div > div.col-md-3 {
@@ -417,6 +419,86 @@ body > nav > h1 {
   }
 
   .cardBack {
+    width: 100%;
+  }
+
+  .col-3 {
+    padding: 5px;
+  }
+
+  .panel {
+    margin: 5px;
+  }
+
+  .howMuch,
+  #betAmount,
+  #bet,
+  #deal,
+  #hit,
+  #double-down,
+  #split-button,
+  #stand,
+  #replay,
+  #instructions {
+    width: 5em;
+    height: 2.5em;
+    margin-bottom: .5em;
+  }
+
+  #double-down {
+    font-size: 8.5px;
+    margin-bottom: .5em;
+    height: 3em;
+  }
+
+  #instructions {
+    font-size: 10px;
+    width: 7.5em;
+    height: 3em;
+  }
+
+  #replay {
+    margin-bottom: .5em;
+  }
+
+  .card-table-top {
+    padding-left: 0px;
+    padding-right: 0px;
+  }
+
+  .youBusted {
+    display: none;
+  }
+
+  #bet1 {
+    margin: .2em;
+    margin-top: .7em;
+  }
+
+  .equals {
+    padding-right: 5px;
+  }
+
+  .amountOfMoney {
+    font-size: 3.2em;
+    padding-top: .2em;
+  }
+
+  #navbarNavAltMarkup > div > h1 {
+    font-size: 1.8em;
+  }
+
+  #splitHitButton,
+  #splitDoubleDownButton,
+  #splitStandButton {
+    font-size: .5em;
+  }
+
+  .howMuch {
+    text-align: left;
+  }
+
+  .row {
     width: 100%;
   }
 

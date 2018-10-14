@@ -310,7 +310,7 @@ const placeBet = () => {
   coinsAudio.play();
   let bet1 = document.getElementById('bet1');
   if (betAmount.value > parseInt(amountOfMoney.innerHTML)) {
-    alert("You don't have enough money, Stupid!");
+    alert("You don't have enough money");
 } else if (betAmount.value >= 5) {
     amountOfMoney.innerHTML -= betAmount.value;
     amountOfMoney.style.display = 'inline-block';
@@ -392,7 +392,7 @@ let doubleDown = () => {
     card = drawCard();
     stand();
   } else {
-    alert("you don't have enough money, Stupid!")
+    alert("you don't have enough money")
   }
 }
 
@@ -412,7 +412,7 @@ let splitDoubleDown = () => {
     card = drawCard();
     stand();
   } else {
-    alert("you don't have enough money, Stupid!")
+    alert("you don't have enough money")
   }
 }
 
@@ -430,43 +430,49 @@ var autoDraw = () => {
 // This function allows you to split your initial hand before you hit
 const split = () => {
   if (playerArray[0] === playerArray[1]) {
-    dealAudio.play();
-    document.getElementById('hit').disabled = false;
-    document.getElementById('deal').disabled = true;
-    document.getElementById('split-button').disabled = true;
-    document.getElementById('double-down').disabled = true;
-    amountOfMoney.innerHTML = parseInt(amountOfMoney.innerHTML) - parseInt(betAmount.value);
-    betAmount.value *= 2;
-    extraPlayerBox.appendChild(splitBox).style.transform = 'translateX(100px)';
-    splitBox.appendChild(player1Box.childNodes[1]).setAttribute('style', 'top: 0; left: 0');
-    player1Box.childNodes.clean = function(deleteValue) {
-      for (var i = 0; i < this.length; i++) {
-        if (this[i] == deleteValue) {         
-          this.splice(i, 1);
-          i--;
+    if ((betAmount.value * 2) > amountOfMoney.innerHTML) {
+      alert('You do not have enough money to split');
+    } else {
+      dealAudio.play();
+      document.getElementById('hit').disabled = false;
+      document.getElementById('deal').disabled = true;
+      document.getElementById('split-button').disabled = true;
+      document.getElementById('double-down').disabled = true;
+      amountOfMoney.innerHTML = parseInt(amountOfMoney.innerHTML) - parseInt(betAmount.value);
+      betAmount.value *= 2;
+      extraPlayerBox.appendChild(splitBox).style.transform = 'translateX(100px)';
+      splitBox.appendChild(player1Box.childNodes[1]).setAttribute('style', 'top: 0; left: 0');
+      player1Box.childNodes.clean = function(deleteValue) {
+        for (var i = 0; i < this.length; i++) {
+          if (this[i] == deleteValue) {         
+            this.splice(i, 1);
+            i--;
+          }
         }
+        return this;
+      };
+      autoDraw();
+      let card = drawCard();
+      let cardElement = document.createElement('img');
+      cardElement.setAttribute('src', card.cardImage);
+      cardElement.className = 'image';
+      splitBox.appendChild(cardElement).setAttribute('style', 'top: 12px; left: 12px;');
+      playerArray.push(card.rank);
+      card = drawCard();
+      secondPlayerArray = [];
+      for (let i=0;i<playerArray.length;i++){
+          if ((i+2)%2==0) {
+              newPlayerArray.push(playerArray[i]);
+          }
+          else {
+            secondPlayerArray.push(playerArray[i]);
+          }
       }
-      return this;
-    };
-    autoDraw();
-    let card = drawCard();
-    let cardElement = document.createElement('img');
-    cardElement.setAttribute('src', card.cardImage);
-    cardElement.className = 'image';
-    splitBox.appendChild(cardElement).setAttribute('style', 'top: 12px; left: 12px;');
-    playerArray.push(card.rank);
-    card = drawCard();
-    secondPlayerArray = [];
-    for (let i=0;i<playerArray.length;i++){
-        if ((i+2)%2==0) {
-            newPlayerArray.push(playerArray[i]);
-        }
-        else {
-          secondPlayerArray.push(playerArray[i]);
-        }
+      extraPlayerBox.insertBefore(splitButtonsContainer, splitBox).setAttribute('style', 'display: block; transform: translateX(2em);');
+      playerBoxArray.push(splitBox);
+      console.log(betAmount.value)
+      console.log(amountOfMoney.innerHTML)
     }
-    extraPlayerBox.insertBefore(splitButtonsContainer, splitBox).setAttribute('style', 'display: block; transform: translateX(2em);');
-    playerBoxArray.push(splitBox);
   }
 }
 
